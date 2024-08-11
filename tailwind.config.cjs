@@ -1,8 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+
+const tailwindColors = require("tailwindcss/colors");
+
 module.exports = {
-  content: ["./index.html", "./src/**/*.res.mjs"],
+  content: ["./index.html", "./src/**/*.res.mjs", "./src/**/*.jsx"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: tailwindColors["blue"],
+      },
+    },
   },
   plugins: [],
 };

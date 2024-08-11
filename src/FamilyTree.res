@@ -35,19 +35,21 @@ open Utils
 
 module Icons = {
   module Plus = {
-    @module("./icons") @react.component
+    @module("react-icons/fi") @react.component
     external make: unit => React.element = "FiPlus"
   }
   module Minus = {
-    @module("./icons") @react.component
+    @module("react-icons/fi") @react.component
     external make: unit => React.element = "FiMinus"
   }
 }
 
+type relation = Blood(string, string) | InLaw
+
 type personDetail = {
   id: string,
   name: string,
-  relation: Types.relation,
+  relation: relation,
   spouse: string,
   children: array<(string, string)>,
   coparents: Belt.Map.String.t<array<string>>,
@@ -216,7 +218,13 @@ let getGenGroupings = details => {
 }
 
 @react.component
-let make = (~familyTreeData: array<Types.person>, ~rootNode: string) => {
+let make = (~familyTreeData: array<Types.person>, ~rootId: option<string>) => {
+  // if rootId is None, will use first entry in familyTreeData as root
+  let rootNode =
+    rootId
+    ->Option.mapOr(familyTreeData->Array.get(0)->Option.map(f => f.id), r => r->Some)
+    ->Option.getOr("")
+
   let (details, genGrouping, desGrouping) = React.useMemo0(() => {
     let details = getDetails(familyTreeData, rootNode)
     let (genGrouping, desGrouping) = getGenGroupings(details)
