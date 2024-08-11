@@ -5,8 +5,11 @@ import * as FamilyTree from "./FamilyTree.res.mjs";
 import * as UploadJsx from "./upload.jsx";
 import * as Core__Option from "@rescript/core/src/Core__Option.res.mjs";
 import * as JsxRuntime from "react/jsx-runtime";
+import FamilyTreePng from "./assets/family-tree.png";
 
 var make = UploadJsx.JsonUpload;
+
+var imgUrl = FamilyTreePng;
 
 function App(props) {
   var match = React.useState(function () {
@@ -19,9 +22,15 @@ function App(props) {
                       children: [
                         JsxRuntime.jsxs("div", {
                               children: [
-                                JsxRuntime.jsx("h1", {
-                                      children: "Family Tree",
-                                      className: "px-6 text-2xl font-black mb-2"
+                                JsxRuntime.jsxs("div", {
+                                      children: [
+                                        JsxRuntime.jsx("img", {
+                                              src: imgUrl,
+                                              width: "32"
+                                            }),
+                                        "Family Tree"
+                                      ],
+                                      className: "px-6 text-2xl font-black mb-2 flex flex-row gap-2"
                                     }),
                                 JsxRuntime.jsx("div", {
                                       children: JsxRuntime.jsx(make, {

@@ -13,6 +13,7 @@ let specDef = `{
   spouse: id || undefined,
 }
 `
+@module("./assets/family-tree.png") external imgUrl: string = "default"
 
 @react.component
 let make = () => {
@@ -26,7 +27,10 @@ let make = () => {
   <div className="py-6">
     <div className="flex flex-col lg:flex-row ">
       <div className="flex-none">
-        <h1 className="px-6 text-2xl font-black mb-2"> {"Family Tree"->React.string} </h1>
+        <div className="px-6 text-2xl font-black mb-2 flex flex-row gap-2">
+          <img src={imgUrl} width={"32"} />
+          {"Family Tree"->React.string}
+        </div>
         // <button className="bg-blue-400"> {"Button"->React.string} </button>
         <div className="px-6">
           <JsonUpload setJsonData={v => v->decodeData} />
