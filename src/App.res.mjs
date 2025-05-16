@@ -7,6 +7,23 @@ import * as Core__Option from "@rescript/core/src/Core__Option.res.mjs";
 import * as JsxRuntime from "react/jsx-runtime";
 import FamilyTreePng from "./assets/family-tree.png";
 
+function App$Attribution(props) {
+  return JsxRuntime.jsxs("div", {
+              children: [
+                JsxRuntime.jsx("span", {
+                      children: "By ",
+                      className: "font-normal text-gray-600"
+                    }),
+                JsxRuntime.jsx("a", {
+                      children: "Thomas Wright",
+                      className: "font-bold text-blue-600",
+                      href: "https://github.com/thomaswright/family-tree"
+                    })
+              ],
+              className: "text-xs p-6"
+            });
+}
+
 var make = UploadJsx.JsonUpload;
 
 var imgUrl = FamilyTreePng;
@@ -70,9 +87,13 @@ function App(props) {
                                           rootId: undefined
                                         })
                                   });
-                      }))
+                      })),
+                JsxRuntime.jsx("div", {
+                      className: "flex-1"
+                    }),
+                JsxRuntime.jsx(App$Attribution, {})
               ],
-              className: "py-6"
+              className: "min-h-screen min-w-screen flex flex-col pt-6"
             });
 }
 

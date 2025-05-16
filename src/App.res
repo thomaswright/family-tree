@@ -1,3 +1,15 @@
+module Attribution = {
+  @react.component
+  let make = () => {
+    <div className="text-xs p-6">
+      <span className={"font-normal text-gray-600"}> {"By "->React.string} </span>
+      <a className="font-bold text-blue-600" href={"https://github.com/thomaswright/family-tree"}>
+        {"Thomas Wright"->React.string}
+      </a>
+    </div>
+  }
+}
+
 module JsonUpload = {
   @module("./upload.jsx") @react.component
   external make: (~setJsonData: array<Types.person> => unit) => React.element = "JsonUpload"
@@ -24,7 +36,7 @@ let make = () => {
     setJsonData(_ => v->Some)
   }
 
-  <div className="py-6">
+  <div className="min-h-screen min-w-screen flex flex-col pt-6">
     <div className="flex flex-col lg:flex-row ">
       <div className="flex-none">
         <div className="px-6 text-2xl font-black mb-2 flex flex-row gap-2">
@@ -63,5 +75,7 @@ let make = () => {
         <FamilyTree familyTreeData={jsonData_} rootId={None} />
       </div>
     })}
+    <div className="flex-1" />
+    <Attribution />
   </div>
 }
